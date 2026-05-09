@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.school.lostandfound.mapper.MessageMapper">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO messages (sender_id, receiver_id, content, send_time)
+        VALUES (#{senderId}, #{receiverId}, #{content}, #{sendTime})
+    </insert>
+
+    <!-- Get list of people I chatted with or all messages? 
+         The requirement says "check messages". 
+         Simplest is to get all messages for a user, or get chat history.
+         Let's implement 'get all messages involving me' and 'get specific chat'.
+    -->
+    
+    <select id="selectByUserId" resultType="com.school.lostandfound.entity.Message">
+        SELECT m.*, u.name as sender_name, u.avatar as sender_avatar
+        FROM messages m
+        JOIN (
+            SELECT MAX(id) as max_id
+            FROM messages
+            WHERE sender_id = #{userId} OR receiver_id = #{userId}
+            GROUP BY 
+                CASE WHEN sender_id &lt; receiver_id THEN sender_id ELSE receiver_id END,
+                CASE WHEN sender_id &lt; receiver_id THEN receiver_id ELSE sender_id END
+        ) latest ON m.id = latest.max_id
+        LEFT JOIN users u ON u.id = CASE WHEN m.sender_id = #{userId} THEN m.receiver_id ELSE m.sender_id END
+        ORDER BY m.send_time DESC
+    </select>
+
+    <select id="selectChat" resultType="com.school.lostandfound.entity.Message">
+        SELECT m.*, u.name as sender_name, u.avatar as sender_avatar
+        FROM messages m
+        LEFT JOIN users u ON m.sender_id = u.id
+        WHERE (m.sender_id = #{user1} AND m.receiver_id = #{user2})
+           OR (m.sender_id = #{user2} AND m.receiver_id = #{user1})
+        ORDER BY m.send_time ASC
+    </select>
+</mapper>

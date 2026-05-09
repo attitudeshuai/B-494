@@ -1,0 +1,112 @@
+:root {
+  --primary-color: #0ca678;
+  --secondary-color: #20c997;
+  --bg-light: #f8f9fa;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.bg-primary {
+  background-color: var(--primary-color) !important;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: #099268;
+  border-color: #099268;
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.card {
+  transition: transform 0.2s ease-in-out;
+}
+
+.hover-card:hover {
+  transform: translateY(-5px);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Toast Styles */
+.toast-container-custom {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1050;
+}
+
+.toast-custom {
+  background: white;
+  border-radius: 10px;
+  padding: 15px 25px;
+  margin-bottom: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  animation: slideIn 0.3s ease-out;
+  min-width: 300px;
+}
+
+.toast-custom i {
+  font-size: 1.5rem;
+  margin-right: 15px;
+}
+
+.toast-custom.success i { color: #0ca678; }
+.toast-custom.error i { color: #dc3545; }
+.toast-custom.info i { color: #0d6efd; }
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Admin Styles */
+.admin-sidebar {
+  background: linear-gradient(180deg, #0ca678 0%, #087f5b 100%);
+  min-height: 100vh;
+  color: white;
+}
+
+.sidebar-link {
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  padding: 12px 20px;
+  display: block;
+  border-radius: 0 50px 50px 0;
+  margin-right: 15px;
+  transition: all 0.3s;
+}
+
+.sidebar-link:hover, .sidebar-link.active {
+  background-color: rgba(255,255,255,0.1);
+  color: white;
+  padding-left: 25px;
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.school.lostandfound.mapper.AnnouncementMapper">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO announcements (title, content, create_time, update_time)
+        VALUES (#{title}, #{content}, #{createTime}, #{updateTime})
+    </insert>
+
+    <select id="selectAll" resultType="com.school.lostandfound.entity.Announcement">
+        SELECT * FROM announcements ORDER BY create_time DESC
+    </select>
+    
+    <select id="selectById" resultType="com.school.lostandfound.entity.Announcement">
+        SELECT * FROM announcements WHERE id = #{id}
+    </select>
+    
+    <delete id="deleteById">
+        DELETE FROM announcements WHERE id = #{id}
+    </delete>
+
+    <update id="update">
+        UPDATE announcements
+        <set>
+            <if test="title != null">title = #{title},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+</mapper>
