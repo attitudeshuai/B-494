@@ -15,7 +15,7 @@ public class LostItemServiceImpl implements LostItemService {
 
     @Override
     public void publish(LostItem item) {
-        item.setStatus(0); // Pending audit
+        item.setStatus(1); // Approved
         lostItemMapper.insert(item);
     }
 
