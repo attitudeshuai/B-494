@@ -14,9 +14,9 @@ onMounted(() => {
 
 const loadData = async () => {
   try {
-    const lostRes = await request.get('/lost/list?status=0');
+    const lostRes = await request.get('/lost/list');
     lostItems.value = lostRes || [];
-    const foundRes = await request.get('/found/list?status=1');
+    const foundRes = await request.get('/found/list');
     foundItems.value = foundRes || [];
     const annRes = await request.get('/announcement/list');
     announcements.value = annRes || [];

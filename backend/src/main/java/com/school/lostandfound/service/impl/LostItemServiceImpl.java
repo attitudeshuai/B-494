@@ -15,7 +15,8 @@ public class LostItemServiceImpl implements LostItemService {
 
     @Override
     public void publish(LostItem item) {
-        item.setStatus(1); // Approved
+        item.setStatus(0);
+        item.setCreateTime(System.currentTimeMillis());
         lostItemMapper.insert(item);
     }
 
