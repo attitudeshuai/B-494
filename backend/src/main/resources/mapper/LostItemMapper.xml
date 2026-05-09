@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.school.lostandfound.mapper.LostItemMapper">
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO lost_items (name, place, lost_time, description, image_path, user_id, status)
-        VALUES (#{name}, #{place}, #{lostTime}, #{description}, #{imagePath}, #{userId}, #{status})
+        INSERT INTO lost_items (name, place, lost_time, description, image_path, user_id, status, create_time)
+        VALUES (#{name}, #{place}, #{lostTime}, #{description}, #{imagePath}, #{userId}, #{status}, #{createTime})
     </insert>
 
     <update id="updateStatus">
