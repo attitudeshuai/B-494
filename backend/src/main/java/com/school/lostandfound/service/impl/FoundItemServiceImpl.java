@@ -16,6 +16,7 @@ public class FoundItemServiceImpl implements FoundItemService {
     @Override
     public void publish(FoundItem item) {
         item.setStatus(0); // Pending audit
+        item.setCreateTime(System.currentTimeMillis());
         foundItemMapper.insert(item);
     }
 
